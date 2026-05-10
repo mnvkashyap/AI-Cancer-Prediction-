@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Assessment Result</title>
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+
+        *{
+            font-family:'Poppins',sans-serif;
+        }
+
+        body{
+            background:
+            linear-gradient(135deg,#0f172a,#1e293b,#0f766e);
+            color:white;
+            min-height:100vh;
+            overflow-x:hidden;
+        }
+
+        .main-container{
+            padding:60px 0;
+        }
+
+        .glass-card{
+            background:rgba(255,255,255,0.08);
+            border:1px solid rgba(255,255,255,0.1);
+            border-radius:30px;
+            padding:45px;
+            backdrop-filter:blur(15px);
+            box-shadow:0 15px 40px rgba(0,0,0,0.4);
+        }
+
+        .result-title{
+            font-size:55px;
+            font-weight:700;
+            margin-bottom:20px;
+            text-align:center;
+        }
+
+        .risk-box{
+    border-radius:25px;
+    padding:35px;
+    margin-bottom:35px;
+    text-align:center;
+    border:1px solid;
+    backdrop-filter:blur(10px);
+}
+
+/* LOW RISK */
+
+.low-risk{
+    background:rgba(34,197,94,0.18);
+    border-color:rgba(34,197,94,0.4);
+    box-shadow:0 0 25px rgba(34,197,94,0.25);
+}
+
+/* MODERATE RISK */
+
+.moderate-risk{
+    background:rgba(251,191,36,0.18);
+    border-color:rgba(251,191,36,0.4);
+    box-shadow:0 0 25px rgba(251,191,36,0.25);
+}
+
+/* HIGH RISK */
+
+.high-risk{
+    background:rgba(239,68,68,0.18);
+    border-color:rgba(239,68,68,0.45);
+    box-shadow:0 0 30px rgba(239,68,68,0.3);
+}
+        .risk-box h2{
+            font-size:45px;
+            font-weight:700;
+        }
+
+        .section-box{
+            background:rgba(255,255,255,0.08);
+            padding:35px;
+            border-radius:25px;
+            margin-top:30px;
+            transition:0.3s;
+        }
+
+        .section-box:hover{
+            transform:translateY(-5px);
+            background:rgba(255,255,255,0.1);
+        }
+
+        .section-box h3{
+            margin-bottom:25px;
+            font-weight:700;
+            color:#7dd3fc;
+        }
+
+        ul{
+            padding-left:20px;
+        }
+
+        li{
+            margin-bottom:14px;
+            font-size:17px;
+            line-height:1.7;
+        }
+
+        .btn-custom{
+            padding:16px 35px;
+            border-radius:16px;
+            font-size:18px;
+            font-weight:600;
+            transition:0.3s;
+        }
+
+        .btn-custom:hover{
+            transform:scale(1.05);
+        }
+
+        .video-card{
+            background:rgba(255,255,255,0.08);
+            padding:20px;
+            border-radius:20px;
+            height:100%;
+            transition:0.3s;
+        }
+
+        .video-card:hover{
+            transform:translateY(-6px);
+            background:rgba(255,255,255,0.12);
+        }
+
+        .video-card a{
+            color:#38bdf8;
+            text-decoration:none;
+            font-size:18px;
+            font-weight:600;
+        }
+
+        .video-card a:hover{
+            text-decoration:underline;
+        }
+
+        .top-image{
+            width:100%;
+            height:420px;
+            object-fit:cover;
+            object-position:center;
+            border-radius:30px;
+            margin-bottom:35px;
+            box-shadow:0 12px 35px rgba(0,0,0,0.45);
+        }
+
+        .feature-img{
+            width:100%;
+            height:240px;
+            object-fit:cover;
+            border-radius:22px;
+            box-shadow:0 8px 20px rgba(0,0,0,0.4);
+            transition:0.4s;
+        }
+
+        .feature-img:hover{
+            transform:scale(1.03);
+        }
+
+        .food-title{
+            margin-top:15px;
+            font-weight:600;
+        }
+
+        .disclaimer{
+            font-size:17px;
+            line-height:1.8;
+            opacity:0.95;
+        }
+
+        @media(max-width:768px){
+
+            .result-title{
+                font-size:38px;
+            }
+
+            .risk-box h2{
+                font-size:32px;
+            }
+
+            .top-image{
+                height:260px;
+            }
+
+            .glass-card{
+                padding:25px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="container main-container">
+
+    <div class="glass-card">
+
+        <!-- TOP IMAGE -->
+
+        <img
+        src="https://images.pexels.com/photos/7089401/pexels-photo-7089401.jpeg?auto=compress&cs=tinysrgb&w=1200"
+        class="top-image"
+        alt="Doctor consulting patient"
+        >
+
+        <!-- TITLE -->
+
+        <h1 class="result-title">
+            Your Breast Health Assessment
+        </h1>
+
+        <!-- RISK RESULT -->
+
+        <div class="
+    risk-box
+    {% if risk == 'Low Risk' %}
+        low-risk
+    {% elif risk == 'Moderate Risk' %}
+        moderate-risk
+    {% else %}
+        high-risk
+    {% endif %}
+">
+
+            <h2>
+                {{ risk }}
+            </h2>
+
+            <h4 class="mt-3">
+                Risk Score: {{ score }}
+            </h4>
+
+            <p class="lead mt-4">
+                {{ message }}
+            </p>
+
+        </div>
+
+        <!-- SAFETY -->
+
+        <div class="section-box">
+
+            <h3>
+                Safety Measures
+            </h3>
+
+            <div class="row g-4 align-items-center">
+
+                <div class="col-md-5">
+
+                    <img
+                    src="https://images.pexels.com/photos/6129507/pexels-photo-6129507.jpeg?auto=compress&cs=tinysrgb&w=1200"
+                    class="feature-img"
+                    >
+
+                </div>
+
+                <div class="col-md-7">
+
+                    <ul>
+                        <li>Perform regular breast self examinations.</li>
+                        <li>Schedule regular medical checkups.</li>
+                        <li>Maintain healthy body weight.</li>
+                        <li>Exercise daily and stay active.</li>
+                        <li>Reduce stress and improve sleep quality.</li>
+                        <li>Avoid smoking and alcohol.</li>
+                    </ul>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- THINGS TO DO -->
+
+        <div class="section-box">
+
+            <h3>
+                Things To Do
+            </h3>
+
+            <div class="row g-4 align-items-center">
+
+                <div class="col-md-7">
+
+                    <ul>
+                        <li>Eat healthy nutritious foods.</li>
+                        <li>Monitor body changes regularly.</li>
+                        <li>Talk openly with healthcare professionals.</li>
+                        <li>Stay mentally positive and supported.</li>
+                        <li>Follow healthy lifestyle habits.</li>
+                    </ul>
+
+                </div>
+
+                <div class="col-md-5">
+
+                    <img
+                    src="https://images.pexels.com/photos/3768916/pexels-photo-3768916.jpeg?auto=compress&cs=tinysrgb&w=1200"
+                    class="feature-img"
+                    >
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- THINGS NOT TO DO -->
+
+        <div class="section-box">
+
+            <h3>
+                Things NOT To Do
+            </h3>
+
+            <div class="row g-4 align-items-center">
+
+                <div class="col-md-5">
+
+                    <img
+                    src="https://us.123rf.com/450wm/brovector/brovector2503/brovector250300063/266851383-health-professional-standing-beside-large-prohibition-symbol-emphasizing-the-importance-of-avoiding.jpg"
+                    class="feature-img"
+                    >
+
+                </div>
+
+                <div class="col-md-7">
+
+                    <ul>
+                        <li>Do not ignore unusual symptoms.</li>
+                        <li>Do not delay doctor consultation.</li>
+                        <li>Avoid excessive junk food.</li>
+                        <li>Avoid self-medication.</li>
+                        <li>Do not panic after seeing symptoms.</li>
+                    </ul>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- FOODS -->
+
+        <div class="section-box">
+
+            <h3>
+                Recommended Foods
+            </h3>
+
+            <div class="row g-4">
+
+                <div class="col-md-4 text-center">
+
+                    <img
+                    src="https://images.pexels.com/photos/1132047/pexels-photo-1132047.jpeg?auto=compress&cs=tinysrgb&w=1200"
+                    class="feature-img"
+                    >
+
+                    <h5 class="food-title">
+                        Healthy Fruits
+                    </h5>
+
+                </div>
+
+                <div class="col-md-4 text-center">
+
+                    <img
+                    src="https://images.pexels.com/photos/1640774/pexels-photo-1640774.jpeg?auto=compress&cs=tinysrgb&w=1200"
+                    class="feature-img"
+                    >
+
+                    <h5 class="food-title">
+                        Green Vegetables
+                    </h5>
+
+                </div>
+
+                <div class="col-md-4 text-center">
+
+                    <img
+                    src="https://images.pexels.com/photos/5938/food-salad-healthy-lunch.jpg?auto=compress&cs=tinysrgb&w=1200"
+                    class="feature-img"
+                    >
+
+                    <h5 class="food-title">
+                        Balanced Diet
+                    </h5>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- EXERCISES -->
+
+        <div class="section-box">
+
+            <h3>
+                Recommended Exercises
+            </h3>
+
+            <div class="row g-4">
+
+                <div class="col-md-4 text-center">
+
+                    <img
+                    src="https://images.pexels.com/photos/2402777/pexels-photo-2402777.jpeg?auto=compress&cs=tinysrgb&w=1200"
+                    class="feature-img"
+                    >
+
+                    <h5 class="food-title">
+                        Running & Walking
+                    </h5>
+
+                </div>
+
+                <div class="col-md-4 text-center">
+
+                    <img
+                    src="https://images.pexels.com/photos/317157/pexels-photo-317157.jpeg?auto=compress&cs=tinysrgb&w=1200"
+                    class="feature-img"
+                    >
+
+                    <h5 class="food-title">
+                        Yoga & Meditation
+                    </h5>
+
+                </div>
+
+                <div class="col-md-4 text-center">
+
+                    <img
+                    src="https://images.pexels.com/photos/1552242/pexels-photo-1552242.jpeg?auto=compress&cs=tinysrgb&w=1200"
+                    class="feature-img"
+                    >
+
+                    <h5 class="food-title">
+                        Daily Fitness
+                    </h5>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- VIDEOS -->
+
+        <div class="section-box">
+
+            <h3>
+                Doctor Consultation & Awareness Videos
+            </h3>
+
+            <div class="row g-4">
+
+                <div class="col-md-6">
+
+                    <div class="video-card">
+
+                    <img src="https://www.nationalbreastcancer.org/wp-content/uploads/nipple-discharge.jpeg"
+                      class="feature-img"
+                    >
+
+                        <h5 class="mt-4">
+                            Breast Cancer Symptoms & Diagnosis
+                        </h5>
+
+                        <a href="https://www.youtube.com/watch?v=cwDITwyuuYk"
+                           target="_blank">
+                           Watch Video
+                        </a>
+
+                    </div>
+
+                </div>
+
+                <div class="col-md-6">
+
+                    <div class="video-card">
+
+                         <img src="https://www.nationalbreastcancer.org/wp-content/uploads/change-in-breast-or-nipple-early-detection-1.jpeg"
+                           class="feature-img"
+                         >
+
+
+                        <h5 class="mt-4">
+                            How To Self Check For Breast Cancer
+                        </h5>
+
+                        <a href="https://www.youtube.com/watch?v=LrfE6JUwIms"
+                           target="_blank">
+                           Watch Video
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- DISCLAIMER -->
+
+        <div class="section-box">
+
+            <h3>
+                Important Disclaimer
+            </h3>
+
+            <p class="disclaimer">
+                This AI assessment tool is designed for awareness and educational purposes only.
+                It is NOT a medical diagnosis system.
+                Always consult qualified healthcare professionals for accurate diagnosis and treatment.
+            </p>
+
+        </div>
+
+        <!-- BUTTON -->
+
+        <div class="text-center mt-5">
+
+            <a href="/assessment"
+               class="btn btn-primary btn-custom">
+               Take Assessment Again
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AI Cancer Prediction</title>
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+    <style>
+
+        *{
+            font-family:'Poppins',sans-serif;
+        }
+
+        body{
+            background:
+            linear-gradient(135deg,#0f172a,#1e293b,#0f766e);
+
+            color:white;
+            min-height:100vh;
+            overflow-x:hidden;
+        }
+
+        .main-container{
+            padding:60px 0;
+        }
+
+        .glass-card{
+            background:rgba(255,255,255,0.08);
+            border:1px solid rgba(255,255,255,0.1);
+            border-radius:30px;
+            padding:45px;
+            backdrop-filter:blur(15px);
+            box-shadow:0 15px 40px rgba(0,0,0,0.4);
+        }
+
+        .title{
+            font-size:50px;
+            font-weight:700;
+            margin-bottom:15px;
+        }
+
+        .subtitle{
+            opacity:0.85;
+            margin-bottom:35px;
+            font-size:18px;
+        }
+
+        .form-label{
+            margin-bottom:10px;
+            font-size:17px;
+            font-weight:500;
+        }
+
+        .form-control{
+            background:rgba(255,255,255,0.1);
+            border:none;
+            color:white;
+            padding:14px;
+            border-radius:14px;
+            margin-bottom:20px;
+        }
+
+        .form-control:focus{
+            background:rgba(255,255,255,0.15);
+            color:white;
+            border:1px solid #38bdf8;
+            box-shadow:none;
+        }
+
+        .btn-custom{
+            padding:16px;
+            font-size:20px;
+            border-radius:15px;
+            font-weight:600;
+            transition:0.3s;
+        }
+
+        .btn-custom:hover{
+            transform:scale(1.03);
+        }
+
+        .side-image{
+            width:100%;
+            border-radius:25px;
+            box-shadow:0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .info-box{
+            background:rgba(255,255,255,0.08);
+            padding:25px;
+            border-radius:20px;
+            margin-top:25px;
+        }
+
+        .prediction-box{
+            background:rgba(56,189,248,0.15);
+            padding:25px;
+            border-radius:18px;
+            margin-top:30px;
+            text-align:center;
+            border:1px solid rgba(56,189,248,0.4);
+        }
+
+        .prediction-box h2{
+            font-size:35px;
+            font-weight:700;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="container main-container">
+
+    <div class="row align-items-center g-5">
+
+        <!-- LEFT FORM -->
+
+        <div class="col-lg-7">
+
+            <div class="glass-card">
+
+                <h1 class="title">
+                    AI Cancer Prediction
+                </h1>
+
+                <p class="subtitle">
+                    Enter medical measurements below to predict possible breast cancer diagnosis using AI.
+                </p>
+
+                <form method="POST">
+
+                    <div class="row">
+
+                        {% for feature in features %}
+
+                        <div class="col-md-6">
+
+                            <label class="form-label">
+                                {{ feature.replace('_', ' ').title() }}
+                            </label>
+
+                            <input
+                                type="number"
+                                step="any"
+                                name="{{ feature }}"
+                                class="form-control"
+                                required
+                            >
+
+                        </div>
+
+                        {% endfor %}
+
+                    </div>
+
+                    <button class="btn btn-primary btn-custom w-100 mt-3">
+                        Predict Cancer Risk
+                    </button>
+
+                </form>
+
+                {% if prediction %}
+
+                <div class="prediction-box">
+
+                    <h2>
+                        {{ prediction }}
+                    </h2>
+
+                </div>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+        <!-- RIGHT SIDE -->
+
+        <div class="col-lg-5">
+
+            <img
+                src="https://images.unsplash.com/photo-1581595219315-a187dd40c322?q=80&w=1200&auto=format&fit=crop"
+                class="side-image"
+            >
+
+            <div class="info-box">
+
+                <h4>
+                    AI-Assisted Analysis
+                </h4>
+
+                <p>
+                    This tool uses machine learning to analyze breast cancer-related medical measurements and generate predictions.
+                </p>
+
+            </div>
+
+            <div class="info-box">
+
+                <h4>
+                    Early Detection Awareness
+                </h4>
+
+                <p>
+                    Early diagnosis can improve treatment outcomes and increase awareness about breast health.
+                </p>
+
+            </div>
+
+            <div class="info-box">
+
+                <h4>
+                    Privacy Focused
+                </h4>
+
+                <p>
+                    Your inputs remain private and are only used for AI-based prediction purposes.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>
